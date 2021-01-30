@@ -56,5 +56,15 @@ namespace my_books.Data.Services
 
             return _book;
         }
+
+        public void DeleteBookById(int bookId)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.Id == bookId);
+            if(_book != null)
+            {
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
+        }
     }
 }
