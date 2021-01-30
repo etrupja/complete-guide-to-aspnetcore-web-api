@@ -4,3 +4,4 @@
 
 /my-books/bin/Debug/net5.0
 /my-books/obj/Debug/net5.0/staticwebassets
+*.user
