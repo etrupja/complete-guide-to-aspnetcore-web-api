@@ -1,4 +1,4 @@
-# complete-guide-to-aspnetcore-web-api
+# Complete Guide to Asp.Net Core Web API
 This is the source code of the "Complete Guide to Asp.Net Core Web API" course
 
 You will find a branch for each part/clip with a begin and an end state.
