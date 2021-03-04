@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using my_books.ActionResults;
 using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.ViewModels;
@@ -29,7 +30,7 @@ namespace my_books.Controllers
                 var newPublisher = _publishersService.AddPublisher(publisher);
                 return Created(nameof(AddPublisher), newPublisher);
             }
-            catch(PublisherNameException ex)
+            catch (PublisherNameException ex)
             {
                 return BadRequest($"{ex.Message}, Publisher name: {ex.PublisherName}");
             }
@@ -37,19 +38,19 @@ namespace my_books.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
-        public ActionResult<Publisher> GetPublisherById(int id)
+        public IActionResult GetPublisherById(int id)
         {
             var _response = _publishersService.GetPublisherById(id);
 
-            if(_response != null)
+            if (_response != null)
             {
-                //return Ok(_response);
-                return _response;
-            } else
+                return Ok(_response);
+            }
+            else
             {
                 return NotFound();
             }
