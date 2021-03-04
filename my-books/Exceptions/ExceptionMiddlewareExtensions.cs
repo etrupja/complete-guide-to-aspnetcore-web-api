@@ -37,5 +37,10 @@ namespace my_books.Exceptions
                 });
             });
         }
+    
+        public static void ConfigureCustomExceptionHandler(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<CustomExceptionMiddleware>();
+        }
     }
 }
