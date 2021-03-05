@@ -17,6 +17,8 @@ namespace my_books.Data.Services
             _context = context;
         }
 
+        public List<Publisher> GetAllPublishers() => _context.Publishers.ToList();
+
         public Publisher AddPublisher(PublisherVM publisher)
         {
             if (StringStartsWithNumber(publisher.Name)) throw new PublisherNameException("Name starts with number", publisher.Name);
