@@ -43,7 +43,11 @@ namespace my_books
             services.AddTransient<AuthorsService>();
             services.AddTransient<PublishersService>();
 
-            services.AddApiVersioning();
+            services.AddApiVersioning(config => 
+            {
+                config.DefaultApiVersion = new ApiVersion(1, 0);
+                config.AssumeDefaultVersionWhenUnspecified = true;
+            });
 
             services.AddSwaggerGen(c =>
             {
