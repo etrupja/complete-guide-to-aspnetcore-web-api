@@ -43,6 +43,8 @@ namespace my_books
             services.AddTransient<AuthorsService>();
             services.AddTransient<PublishersService>();
 
+            services.AddApiVersioning();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "my_books", Version = "v1" });
