@@ -8,4 +8,4 @@ For example for part 13 you have 2 branches:
 - end-13: this has the end state of the code
 
 
-Course link: https://www.youtube.com/watch?v=8UshqnhkF5Q&list=PL2Q8rFbm-4ru6hExDbfrN3QZNKI7n3p0N&ab_channel=ErvisTrupja
+Course link: https://www.udemy.com/course/the-complete-guide-to-aspnet-web-api/?referralCode=9ABCB407460A099020BD
