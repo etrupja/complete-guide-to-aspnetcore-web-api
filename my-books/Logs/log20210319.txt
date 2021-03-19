@@ -19,3 +19,4 @@ System.Exception: This is an exception thrown from GetAllPublishers()
    at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
 03/19/2021 15:13:58 +01:00 [Error] - Message: {"StatusCode":500,"Message":"This is an exception thrown from GetAllPublishers()","Path":"/api/publishers/get-all-publishers"}
+03/19/2021 15:32:31 +01:00 [Information] - Message: This is just a log in GetAllPublishers()
