@@ -1,0 +1,2 @@
+03/19/2021 14:16:05 +01:00 [] - Message: This is just a log in GetAllPublishers()
+03/19/2021 14:18:53 +01:00 [Information] - Message: This is just a log in GetAllPublishers()
