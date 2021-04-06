@@ -106,6 +106,28 @@ namespace my_books_tests
             Assert.That(actionResult, Is.TypeOf<BadRequestObjectResult>());
         }
 
+        [Test, Order(6)]
+        public void HTTPDELETE_DeletePublisherById_ReturnsOk_Test()
+        {
+            int publisherId = 6;
+
+            IActionResult actionResult = publishersController.DeletePublisherById(publisherId);
+
+            Assert.That(actionResult, Is.TypeOf<OkResult>());
+
+        }
+
+
+        [Test, Order(7)]
+        public void HTTPDELETE_DeletePublisherById_ReturnsBadRequest_Test()
+        {
+            int publisherId = 6;
+
+            IActionResult actionResult = publishersController.DeletePublisherById(publisherId);
+
+            Assert.That(actionResult, Is.TypeOf<BadRequestObjectResult>());
+        }
+
         [OneTimeTearDown]
         public void CleanUp()
         {
