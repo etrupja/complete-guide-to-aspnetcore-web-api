@@ -122,6 +122,29 @@ namespace my_books_tests
             Assert.That(firstBookName, Is.EqualTo("Book 1 Title"));
         }
 
+        [Test, Order(10)]
+        public void DeletePublisherById_PublisherExists_Test()
+        {
+            int publisherId = 6;
+
+            var publisherBefore = publishersService.GetPublisherById(publisherId);
+            Assert.That(publisherBefore, Is.Not.Null);
+            Assert.That(publisherBefore.Name, Is.EqualTo("Publisher 6"));
+
+            publishersService.DeletePublisherById(publisherId);
+
+            var publisherAfter = publishersService.GetPublisherById(publisherId);
+            Assert.That(publisherAfter, Is.Null);
+        }
+
+        [Test, Order(11)]
+        public void DeletePublisherById_PublisherDoesNotExists_Test()
+        {
+            int publisherId = 6;
+
+            Assert.That(() => publishersService.DeletePublisherById(publisherId), Throws.Exception.TypeOf<Exception>().With.Message.EqualTo($"The publisher with id: {publisherId} does not exist"));
+        }
+
 
         [OneTimeTearDown]
         public void CleanUp()
