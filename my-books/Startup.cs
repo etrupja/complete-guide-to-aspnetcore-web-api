@@ -110,6 +110,8 @@ namespace my_books
 
             app.UseRouting();
 
+            //Authentication & Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             //Exception Handling

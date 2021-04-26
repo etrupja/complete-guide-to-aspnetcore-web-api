@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +40,11 @@ namespace my_books.Controllers
         [HttpPost("register-user")]
         public async Task<IActionResult> Register([FromBody]RegisterVM payload)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Please, provide all required fields");
+            }
+
             var userExists = await _userManager.FindByEmailAsync(payload.Email);
 
             if(userExists != null)
@@ -63,6 +69,25 @@ namespace my_books.Controllers
             return Created(nameof(Register), $"User {payload.Email} created");
         }
 
+        [HttpPost("login-user")]
+        public async Task<IActionResult> Login([FromBody]LoginVM payload)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Please, provide all required fields");
+            }
+
+            var user = await _userManager.FindByEmailAsync(payload.Email);
+
+            if(user != null && await _userManager.CheckPasswordAsync(user, payload.Password))
+            {
+                var tokenValue = await GenerateJwtToken(user);
+
+                return Ok(tokenValue);
+            }
+
+            return Unauthorized();
+        }
 
 
 
