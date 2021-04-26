@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using my_books.Data;
 using my_books.Data.Models;
+using my_books.Data.ViewModels.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,32 @@ namespace my_books.Controllers
             _configuration = configuration;
         }
 
+        [HttpPost("register-user")]
+        public async Task<IActionResult> Register([FromBody]RegisterVM payload)
+        {
+            var userExists = await _userManager.FindByEmailAsync(payload.Email);
+
+            if(userExists != null)
+            {
+                return BadRequest($"User {payload.Email} already exists");
+            }
+
+            ApplicationUser newUser = new ApplicationUser()
+            {
+                Email = payload.Email,
+                UserName = payload.UserName,
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            var result = await _userManager.CreateAsync(newUser, payload.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest("User could not be created!");
+            }
+
+            return Created(nameof(Register), $"User {payload.Email} created");
+        }
 
     }
 }
