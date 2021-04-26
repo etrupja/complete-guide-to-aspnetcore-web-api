@@ -1,0 +1,1 @@
+04/26/2021 14:30:41 +02:00 [Information] - Message: This is just a log in GetAllPublishers()
