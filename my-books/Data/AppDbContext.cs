@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using my_books.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace my_books.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
@@ -28,6 +29,7 @@ namespace my_books.Data
 
             modelBuilder.Entity<Log>().HasKey(n => n.Id);
 
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Book> Books { get; set; }
