@@ -59,6 +59,22 @@ namespace my_books
                 //config.ApiVersionReader = new MediaTypeApiVersionReader();
             });
 
+            //Token Validation Parameters
+            var tokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JWT:Secret"])),
+
+                ValidateIssuer = true,
+                ValidIssuer = Configuration["JWT:Issuer"],
+
+                ValidateAudience = true,
+                ValidAudience = Configuration["JWT:Audience"],
+
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+            services.AddSingleton(tokenValidationParameters);
 
             //Add Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -77,17 +93,7 @@ namespace my_books
             {
                 options.SaveToken = true;
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JWT:Secret"])),
-
-                    ValidateIssuer = true,
-                    ValidIssuer = Configuration["JWT:Issuer"],
-
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["JWT:Audience"]
-                };
+                options.TokenValidationParameters = tokenValidationParameters;
             });
 
             services.AddSwaggerGen(c =>
