@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/my-books/bin/Debug/net5.0
+/my-books/obj/Debug/net5.0/staticwebassets
+*.user
+*.suo
+/my-books-tests/bin/Debug/netcoreapp3.1
+/my-books-tests/obj
