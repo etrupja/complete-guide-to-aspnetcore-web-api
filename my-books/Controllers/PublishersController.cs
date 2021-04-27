@@ -6,6 +6,7 @@ using my_books.ActionResults;
 using my_books.Data.Models;
 using my_books.Data.Services;
 using my_books.Data.ViewModels;
+using my_books.Data.ViewModels.Authentication;
 using my_books.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace my_books.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Publisher+","+UserRoles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class PublishersController : ControllerBase

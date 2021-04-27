@@ -66,6 +66,22 @@ namespace my_books.Controllers
                 return BadRequest("User could not be created!");
             }
 
+            switch (payload.Role)
+            {
+                case "Admin":
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.Admin);
+                    break;
+                case "Publisher":
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.Publisher);
+                    break;
+                case "Author":
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.Author);
+                    break;
+                default:
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                    break;
+            }
+
             return Created(nameof(Register), $"User {payload.Email} created");
         }
 
@@ -102,12 +118,20 @@ namespace my_books.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
+            //Add User Roles
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+
             var authSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["JWT:Secret"]));
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
-                expires: DateTime.UtcNow.AddMinutes(1), // 5 - 10mins
+                expires: DateTime.UtcNow.AddMinutes(10), // 5 - 10mins
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
