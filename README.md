@@ -23,8 +23,8 @@ Some of the topics that this course covers are:
 - Sorting, Filtering, and Paging
 - Web API Versioning
 - Unit Testing
-- Token-based Authentication
-- Role-based Authorization
+- Logging information
+- Deploying your app and database to Azure
 
 and much more...
 
