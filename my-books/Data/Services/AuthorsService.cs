@@ -24,6 +24,16 @@ namespace my_books.Data.Services
             _context.Authors.Add(_author);
             _context.SaveChanges();
         }
+        
+        public void AddAAuthor(AuthorVM book)
+        {
+            var _author = new Author()
+            {
+               FullName = book.FullName
+            };
+            _context.Authors.Add(_author);
+            _context.SaveChanges();
+        }
 
         public AuthorWithBooksVM GetAuthorWithBooks(int authorId)
         {
