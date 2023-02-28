@@ -17,6 +17,7 @@ namespace my_books.Data.Services
 
         public void AddAuthor(AuthorVM book)
         {
+            string password = "test123";
             var _author = new Author()
             {
                FullName = book.FullName
