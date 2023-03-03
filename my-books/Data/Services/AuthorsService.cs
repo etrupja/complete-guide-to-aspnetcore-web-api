@@ -35,6 +35,12 @@ namespace my_books.Data.Services
             _context.Authors.Add(_author);
             _context.SaveChanges();
         }
+        
+        public string GeneratePassword(int authorId)
+        {
+            var basePassword = "Password";
+            return basePassword + authorId.ToString();
+        }
 
         public AuthorWithBooksVM GetAuthorWithBooks(int authorId)
         {
